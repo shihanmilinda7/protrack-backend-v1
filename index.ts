@@ -2,10 +2,21 @@ const http = require("http");
 const server = http.createServer();
 const { Server } = require("socket.io");
 
+console.log("process.env.NODE_ENV",process.env.NODE_ENV,)
+let url;
+if (process.env.NODE_ENV === "development") {
+  // Code to run in development environment
+  url = "http://localhost:3005";
+} else {
+  url = "http://erp2.ceyinfo.cloud";
+
+  // Code to run in production environmentds
+}
+
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3001", // Update with your frontend URL
-    // origin: process.env.DEVELOPMENT_FRONTEND_URL, // Update with your frontend URL
+    // origin: "http://localhost:3005", // Update with your frontend URL
+    origin: url, // Update with your frontend URL
   },
 });
 
